@@ -1,10 +1,10 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { Button, Input, Progress } from '@mantine/core';
 import classes from './Game.module.css';
 import WordsArray from '../components/WordsArray/WordsArray';
 
 export default function Game() {
-  const [words] = useState(() => WordsArray.slice(0, 100)); // Initialize words array
+  const [words] = useState(() => WordsArray.slice(0, 80)); // Initialize words array
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [totalCharTyped, setTotalCharTyped] = useState(0);
   const [correctWords, setCorrectWords] = useState(0);
@@ -30,7 +30,7 @@ export default function Game() {
             setInputValue('');
             return 0;
           }
-          return prevTime - 1.667; // decrement by approximately 1.67 every second
+          return prevTime - 1.667; // decrement by approximately 1.667 every second
         });
         setClockTime((prevClockTime) => prevClockTime - 1); // decrement clock time by 1 every second
       }, 100);
@@ -44,7 +44,14 @@ export default function Game() {
   };
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
-    setInputValue(e.target.value);
+    const typedWord = e.target.value.trim().toLowerCase();
+    setInputValue(typedWord);
+
+    if (typedWord === words[currentWordIndex]) {
+      setCorrectWords(correctWords + 1);
+      setNewWord();
+      setInputValue('');
+    }
   }
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -54,7 +61,6 @@ export default function Game() {
       setNewWord();
       setInputValue('');
     } else {
-      setCorrectWords(correctWords - 1);
       setInputValue('');
     }
   }
@@ -67,45 +73,63 @@ export default function Game() {
     <div className={classes.div}>
       <h1>Speed Typer!</h1>
       <div style={{ width: '50%', textAlign: 'center' }}>
-        {!gameOver && (
-          <Button
-            className={classes.gameButton}
-            onClick={startTime}
-            autoContrast
-            variant="gradient"
-            gradient={{ from: 'violet', to: 'orange', deg: 0 }}
-          >
-            Start Timer
-          </Button>
-        )}
-        {gameOver && (
-          <Button
-            className={classes.gameButton}
-            onClick={refreshPage}
-            autoContrast
-            variant="gradient"
-            gradient={{ from: 'violet', to: 'orange', deg: 0 }}
-          >
-            Restart Game
-          </Button>
-        )}
         <div className={classes.stats}>
+          {!gameOver && (
+            <Button
+              className={classes.gameButton}
+              onClick={startTime}
+              autoContrast
+              variant="gradient"
+              gradient={{ from: 'violet', to: 'orange', deg: 0 }}
+            >
+              Start Timer
+            </Button>
+          )}
+          {gameOver && (
+            <Button
+              className={classes.gameButton}
+              onClick={refreshPage}
+              autoContrast
+              variant="gradient"
+              gradient={{ from: 'violet', to: 'orange', deg: 0 }}
+            >
+              Restart Game
+            </Button>
+          )}
           <h3
             className={classes.timer}
             style={clockTime <= 10 ? { color: '#e8590b' } : { color: 'white' }}
           >
-            {clockTime === 60 ? '1:00' : clockTime <= 10 ? `0:0${clockTime}` : `0:${clockTime}`}
+            {clockTime === 60
+              ? '1:00'
+              : clockTime === 10
+                ? `0:${clockTime}`
+                : clockTime <= 9
+                  ? `0:0${clockTime}`
+                  : `0:${clockTime}`}
           </h3>
           <div className={classes.statCounts}>
-            <h3 className={classes.counts}>Words Typed: {correctWords}</h3>
-            <h3 className={classes.counts}>Characters Typed: {totalCharTyped}</h3>
+            <h3 className={classes.counts}>
+              WPM: <span style={{ color: '#e8590b' }}>{totalCharTyped / 5}</span>
+            </h3>
+            <h3 className={classes.counts}>
+              Words Typed: <span style={{ color: '#e8590b' }}>{correctWords}</span>
+            </h3>
+            <h3 className={classes.counts}>
+              Characters Typed: <span style={{ color: '#e8590b' }}>{totalCharTyped}</span>
+            </h3>
+            <h3 className={classes.counts}>
+              Characters Per Second:{' '}
+              <span style={{ color: '#e8590b' }}>{(totalCharTyped / 60).toFixed(2)}</span>
+            </h3>
           </div>
         </div>
         <Progress
           transitionDuration={1667} // 1667 milliseconds = 1.667 seconds
           style={{ margin: 10 }}
           color="orange"
-          radius="xs"
+          size="xl"
+          animated
           value={time}
         />
       </div>

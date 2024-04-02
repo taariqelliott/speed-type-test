@@ -17,7 +17,7 @@
     overflow: scroll;
     justify-content: center;
     align-items: center;
-    height: 500px;
+    height: 300px;
     width: 50%;
     background-color: rgb(64, 64, 64);
     color: black;
@@ -57,6 +57,8 @@
 
 .timer{
     font-size: 30px;
+    max-width: 100px;
+    min-width: 100px;
 }
 
 .gameButton {
