@@ -18,6 +18,9 @@ export function Welcome() {
         </Anchor>
         . To get started edit pages/Home.page.tsx file.
       </Text>
+      <Text>
+        <Anchor href="/test">To Test</Anchor>
+      </Text>
     </>
   );
 }
