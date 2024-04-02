@@ -1,34 +1,35 @@
-# Mantine Vite template
+# Speed Typing Game
+
+This is a simple speed typing game where players can test their typing speed and accuracy. The game presents random words that the player needs to type as quickly and accurately as possible.
 
 ## Features
 
-This template comes with the following features:
+- Randomly generated words for typing practice
+- Timer to track the player's typing speed
+- Accuracy calculation to measure the player's typing accuracy
 
-- [PostCSS](https://postcss.org/) with [mantine-postcss-preset](https://mantine.dev/styles/postcss-preset)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Storybook](https://storybook.js.org/)
-- [Vitest](https://vitest.dev/) setup with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
-- ESLint setup with [eslint-config-mantine](https://github.com/mantinedev/eslint-config-mantine)
+## Installation
 
-## npm scripts
+1. Clone the repository: `git clone https://github.com/taariqelliott/speed-type-test`
+2. Navigate to the project directory: `cd speed-typing-test`
+3. Install the dependencies: `yarn`
 
-## Build and dev scripts
+## Usage
 
-- `dev` – start development server
-- `build` – build production version of the app
-- `preview` – locally preview production build
+1. Start the game: `yarn run dev`
+2. Follow the on-screen instructions to play the game.
+3. Type the presented words as quickly and accurately as possible.
 
-### Testing scripts
+## Contributing
 
-- `typecheck` – checks TypeScript types
-- `lint` – runs ESLint
-- `prettier:check` – checks files with Prettier
-- `vitest` – runs vitest tests
-- `vitest:watch` – starts vitest watch
-- `test` – runs `vitest`, `prettier:check`, `lint` and `typecheck` scripts
+Contributions are welcome! If you have any suggestions or improvements, please open an issue or submit a pull request.
 
-### Other scripts
+### Features To Add
 
-- `storybook` – starts storybook dev server
-- `storybook:build` – build production storybook bundle to `storybook-static`
-- `prettier:write` – formats all files with Prettier
+1. Difficulty Selection
+2. Leaderboard
+3. Theme Selector
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
