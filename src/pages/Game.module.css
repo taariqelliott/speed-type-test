@@ -160,9 +160,16 @@
     bottom: 5px;
     left: 7px;
     text-align: center;
+    @media (max-width: 855px) {
+        flex-direction: column-reverse;
+    }
 }
 
 .anchors {
+    @media (max-width: 914px) {
+        margin-top: -12px;
+        margin-bottom: -3px;
+    }
     transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
 }
 
