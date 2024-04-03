@@ -1,9 +1,22 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
-import { Button, Input, MantineProvider, Progress } from '@mantine/core';
+import {
+  Anchor,
+  Button,
+  Group,
+  Input,
+  MantineProvider,
+  Progress,
+  Text,
+  useMantineColorScheme,
+} from '@mantine/core';
 import classes from './Game.module.css';
 import WordsArray from '../components/WordsArray/WordsArray';
 
 export default function Game() {
+  const { setColorScheme } = useMantineColorScheme({
+    keepTransitions: true,
+  });
+
   const randomizeWords = WordsArray.sort(() => Math.random() - 0.5);
   const [words, setWords] = useState(() => randomizeWords.slice(0, 80)); // Initialize words array
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -81,14 +94,27 @@ export default function Game() {
 
   return (
     <MantineProvider defaultColorScheme="dark">
+      <Group className={classes.themeButtons}>
+        <Button onClick={() => setColorScheme('light')}>Light</Button>
+        <Button onClick={() => setColorScheme('dark')}>Dark</Button>
+        <Button onClick={() => setColorScheme('auto')}>Auto</Button>
+      </Group>
       <div className={classes.div}>
-        <h1>Speed Typer!</h1>
+        <Text
+          className={classes.title}
+          inherit
+          variant="gradient"
+          component="span"
+          gradient={{ from: 'pink', to: 'yellow' }}
+        >
+          Speed Typer!
+        </Text>
         <div style={{ width: '50%', textAlign: 'center' }}>
           <div className={classes.stats}>
             <div className={classes.clockAndButton}>
               <h3
                 className={classes.timer}
-                style={clockTime <= 10 ? { color: '#e8590b' } : { color: 'white' }}
+                style={clockTime <= 10 ? { color: 'red' } : { color: '#91dc1d' }}
               >
                 {clockTime === 60
                   ? '1:00'
@@ -104,7 +130,7 @@ export default function Game() {
                   onClick={startTime}
                   autoContrast
                   variant="gradient"
-                  gradient={{ from: 'violet', to: 'orange', deg: 0 }}
+                  gradient={{ from: 'violet', to: '#ed8607', deg: 0 }}
                 >
                   Start Timer
                 </Button>
@@ -115,7 +141,7 @@ export default function Game() {
                   onClick={refreshGame}
                   autoContrast
                   variant="gradient"
-                  gradient={{ from: 'violet', to: 'orange', deg: 0 }}
+                  gradient={{ from: 'violet', to: '#ed8607', deg: 0 }}
                 >
                   Restart Game
                 </Button>
@@ -123,17 +149,17 @@ export default function Game() {
             </div>
             <div className={classes.statCounts}>
               <h3 className={classes.counts}>
-                WPM: <span style={{ color: '#e8590b' }}>{totalCharTyped / 5}</span>
+                WPM: <span style={{ color: '#ed8607' }}>{totalCharTyped / 5}</span>
               </h3>
               <h3 className={classes.counts}>
-                Words Typed: <span style={{ color: '#e8590b' }}>{correctWords}</span>
+                Words Typed: <span style={{ color: '#ed8607' }}>{correctWords}</span>
               </h3>
               <h3 className={classes.counts}>
-                Characters Typed: <span style={{ color: '#e8590b' }}>{totalCharTyped}</span>
+                Characters Typed: <span style={{ color: '#ed8607' }}>{totalCharTyped}</span>
               </h3>
               <h3 className={classes.counts}>
                 Characters Per Second:{' '}
-                <span style={{ color: '#e8590b' }}>{(totalCharTyped / 60).toFixed(2)}</span>
+                <span style={{ color: '#ed8607' }}>{(totalCharTyped / 60).toFixed(2)}</span>
               </h3>
             </div>
           </div>
@@ -169,6 +195,69 @@ export default function Game() {
           />
         </form>
       </div>
+
+      <Group className={classes.socials}>
+        <Anchor
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.linkedin.com/in/taariq-elliott"
+          style={{ textDecoration: 'none', color: 'inherit' }}
+        >
+          <div
+            className={classes.anchors}
+            style={{ display: 'flex', alignItems: 'center', marginRight: 0 }}
+          >
+            <span style={{ margin: 3 }}>linkedin</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={24}
+              height={24}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="icon icon-tabler icons-tabler-outline icon-tabler-brand-linkedin"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+              <path d="M8 11l0 5" />
+              <path d="M8 8l0 .01" />
+              <path d="M12 16l0 -5" />
+              <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+            </svg>
+          </div>
+        </Anchor>
+        <Anchor
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.github.com/taariqelliott"
+          style={{ textDecoration: 'none', color: 'inherit' }}
+        >
+          <div
+            className={classes.anchors}
+            style={{ display: 'flex', alignItems: 'center', marginLeft: 0 }}
+          >
+            <span style={{ margin: 3 }}>github</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={24}
+              height={24}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="icon icon-tabler icons-tabler-outline icon-tabler-brand-github"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+            </svg>
+          </div>
+        </Anchor>
+      </Group>
     </MantineProvider>
   );
 }

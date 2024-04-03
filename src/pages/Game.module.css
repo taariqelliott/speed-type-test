@@ -10,6 +10,50 @@
 
 }
 
+.title {
+
+    color: var(--mantine-color-black);
+    font-size: 80px;
+    font-weight: 900;
+    font-style: italic;
+    transition: all 0.2s;
+
+
+    @media (max-width: 1032px) {
+        font-size: 60px;
+    }
+
+    @media (max-width: 914px) {
+        font-size: 50px;
+    }
+
+    @media (max-width: 682px) {
+        font-size: 40px;
+    }
+}
+
+.themeButtons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: all 1s;
+
+    @media (max-width: 914px) {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.themeButtons>Button {
+
+    background: #ed8607;
+}
+
+.themeButtons>Button:hover {
+
+    background: hsl(33, 94%, 40%);
+}
+
 .wordDiv {
     display: flex;
     flex-direction: row;
@@ -28,15 +72,16 @@
 
 .currentWord {
     color: black;
-    background: #e8590b;
+    background: #ed8607;
     padding: 3px;
     font-weight: bold;
     border-radius: 5px;
     box-shadow: 3px 3px 10px #00000063;
+
 }
 
 .otherWords {
-    color: gray;
+    color: #808080;
     /* color: transparent;
 	text-shadow: 0 0 8px #000; */
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -46,10 +91,12 @@
     margin: 10px;
     width: 50vw;
     text-align: center;
-    /* border: #e8590b solid 2px;
-    border-radius: 10px;
-    overflow: hidden; */
+    /* border: #ed8607 solid 5px;
+    border-radius: 10px; */
+    /* overflow: hidden; */
+
 }
+
 
 .stats {
     display: flex;
@@ -81,6 +128,13 @@
     margin: 10px;
 }
 
+.gameButton:hover {
+    color: black;
+    filter: brightness(1.15);
+    /* Adjust brightness to make it lighter */
+
+}
+
 .statCounts {
     display: flex;
     flex-direction: column;
@@ -88,8 +142,36 @@
     align-items: center;
     color: white;
     border-radius: 10px;
+    padding: 5px;
+
+    @media (max-width: 800px) {
+        font-size: 15px;
+    }
+
+    @media (max-width: 787px) {
+        font-size: 12px;
+    }
 }
 
 .counts {
     margin: 0px;
+}
+
+.socials {
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    font-size: 1px;
+    font-weight: 100;
+    font-style: normal;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 10px;
+    left: 25px;
+    text-align: center;
+}
+
+.anchors:hover {
+    color: #ed8607;
 }
