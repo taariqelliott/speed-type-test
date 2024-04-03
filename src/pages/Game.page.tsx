@@ -114,7 +114,7 @@ export default function Game() {
             <div className={classes.clockAndButton}>
               <h3
                 className={classes.timer}
-                style={clockTime <= 10 ? { color: 'red' } : { color: '#91dc1d' }}
+                style={clockTime <= 10 ? { color: 'red' } : { color: 'white' }}
               >
                 {clockTime === 60
                   ? '1:00'

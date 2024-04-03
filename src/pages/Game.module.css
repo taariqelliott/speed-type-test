@@ -66,6 +66,7 @@
     gap: 10px;
     padding: 10px;
     border-radius: 5px;
+    border: #ffffff6e solid 1px;
 }
 
 .currentWord {
@@ -79,8 +80,6 @@
 
 .otherWords {
     color: #808080;
-    /* color: transparent;
-	text-shadow: 0 0 8px #000; */
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -99,6 +98,7 @@
     background-color: rgb(64, 64, 64);
     color: black;
     border-radius: 10px;
+    border: #ffffff6e solid 1px;
 }
 
 .clockAndButton {
