@@ -1,10 +1,11 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { Button, Input, MantineProvider, Progress, useMantineColorScheme } from '@mantine/core';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { Button, Input, MantineProvider, Progress } from '@mantine/core';
 import classes from './Game.module.css';
 import WordsArray from '../components/WordsArray/WordsArray';
 
 export default function Game() {
-  const [words] = useState(() => WordsArray.slice(0, 80)); // Initialize words array
+  const randomizeWords = WordsArray.sort(() => Math.random() - 0.5);
+  const [words, setWords] = useState(() => randomizeWords.slice(0, 80)); // Initialize words array
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [totalCharTyped, setTotalCharTyped] = useState(0);
   const [correctWords, setCorrectWords] = useState(0);
@@ -65,8 +66,17 @@ export default function Game() {
     }
   }
 
-  const refreshPage = () => {
-    window.location.reload();
+  const refreshGame = () => {
+    setCurrentWordIndex(0);
+    setTotalCharTyped(0);
+    setCorrectWords(0);
+    setInputValue('');
+    setTime(100);
+    setClockTime(60);
+    setTimerStarted(false);
+    setGameOver(false);
+    const newWordsArray = WordsArray.slice(0, 80); // Generate new set of words
+    setWords(newWordsArray); // Update state with new words
   };
 
   return (
@@ -102,7 +112,7 @@ export default function Game() {
               {gameOver && (
                 <Button
                   className={classes.gameButton}
-                  onClick={refreshPage}
+                  onClick={refreshGame}
                   autoContrast
                   variant="gradient"
                   gradient={{ from: 'violet', to: 'orange', deg: 0 }}
@@ -129,8 +139,9 @@ export default function Game() {
           </div>
           <Progress
             transitionDuration={500} // 1667 milliseconds = 1.667 seconds
-            style={{ margin: 10, overflow: 'hidden' }}
-            color="lime"
+            style={{ margin: 10 }}
+            color="pink"
+            animated
             size="xl"
             value={time}
           />

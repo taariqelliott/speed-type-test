@@ -46,6 +46,9 @@
     margin: 10px;
     width: 50vw;
     text-align: center;
+    /* border: #e8590b solid 2px;
+    border-radius: 10px;
+    overflow: hidden; */
 }
 
 .stats {

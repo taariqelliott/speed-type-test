@@ -1,4 +1,4 @@
-const wordsArray = [
+const wordsArray: string[] = [
   'lucky',
   'even',
   'found',
@@ -287,6 +287,6 @@ const wordsArray = [
 ];
 
 // randomize the words to a new array
-const randomWordsArray = wordsArray.sort(() => Math.random() - 0.5);
+const randomWordsArray: string[] = wordsArray.sort(() => Math.random() - 0.5);
 
 export default randomWordsArray;
