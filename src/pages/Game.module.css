@@ -160,16 +160,21 @@
 .socials {
     font-family: "Roboto Mono", monospace;
     font-optical-sizing: auto;
-    font-size: 1px;
     font-weight: 100;
     font-style: normal;
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-    bottom: 10px;
-    left: 25px;
+    bottom: 5px;
+    left: 5px;
     text-align: center;
+
+}
+
+.anchors {
+    transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+
 }
 
 .anchors:hover {
