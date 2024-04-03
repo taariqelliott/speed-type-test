@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { Button, Input, Progress } from '@mantine/core';
+import { Button, Input, MantineProvider, Progress, useMantineColorScheme } from '@mantine/core';
 import classes from './Game.module.css';
 import WordsArray from '../components/WordsArray/WordsArray';
 
@@ -33,7 +33,7 @@ export default function Game() {
           return prevTime - 1.667; // decrement by approximately 1.667 every second
         });
         setClockTime((prevClockTime) => prevClockTime - 1); // decrement clock time by 1 every second
-      }, 100);
+      }, 1000);
     }
   };
 
@@ -70,91 +70,94 @@ export default function Game() {
   };
 
   return (
-    <div className={classes.div}>
-      <h1>Speed Typer!</h1>
-      <div style={{ width: '50%', textAlign: 'center' }}>
-        <div className={classes.stats}>
-          {!gameOver && (
-            <Button
-              className={classes.gameButton}
-              onClick={startTime}
-              autoContrast
-              variant="gradient"
-              gradient={{ from: 'violet', to: 'orange', deg: 0 }}
-            >
-              Start Timer
-            </Button>
-          )}
-          {gameOver && (
-            <Button
-              className={classes.gameButton}
-              onClick={refreshPage}
-              autoContrast
-              variant="gradient"
-              gradient={{ from: 'violet', to: 'orange', deg: 0 }}
-            >
-              Restart Game
-            </Button>
-          )}
-          <h3
-            className={classes.timer}
-            style={clockTime <= 10 ? { color: '#e8590b' } : { color: 'white' }}
-          >
-            {clockTime === 60
-              ? '1:00'
-              : clockTime === 10
-                ? `0:${clockTime}`
-                : clockTime <= 9
-                  ? `0:0${clockTime}`
-                  : `0:${clockTime}`}
-          </h3>
-          <div className={classes.statCounts}>
-            <h3 className={classes.counts}>
-              WPM: <span style={{ color: '#e8590b' }}>{totalCharTyped / 5}</span>
-            </h3>
-            <h3 className={classes.counts}>
-              Words Typed: <span style={{ color: '#e8590b' }}>{correctWords}</span>
-            </h3>
-            <h3 className={classes.counts}>
-              Characters Typed: <span style={{ color: '#e8590b' }}>{totalCharTyped}</span>
-            </h3>
-            <h3 className={classes.counts}>
-              Characters Per Second:{' '}
-              <span style={{ color: '#e8590b' }}>{(totalCharTyped / 60).toFixed(2)}</span>
-            </h3>
+    <MantineProvider defaultColorScheme="dark">
+      <div className={classes.div}>
+        <h1>Speed Typer!</h1>
+        <div style={{ width: '50%', textAlign: 'center' }}>
+          <div className={classes.stats}>
+            <div className={classes.clockAndButton}>
+              <h3
+                className={classes.timer}
+                style={clockTime <= 10 ? { color: '#e8590b' } : { color: 'white' }}
+              >
+                {clockTime === 60
+                  ? '1:00'
+                  : clockTime === 10
+                    ? `0:${clockTime}`
+                    : clockTime <= 9
+                      ? `0:0${clockTime}`
+                      : `0:${clockTime}`}
+              </h3>
+              {!gameOver && (
+                <Button
+                  className={classes.gameButton}
+                  onClick={startTime}
+                  autoContrast
+                  variant="gradient"
+                  gradient={{ from: 'violet', to: 'orange', deg: 0 }}
+                >
+                  Start Timer
+                </Button>
+              )}
+              {gameOver && (
+                <Button
+                  className={classes.gameButton}
+                  onClick={refreshPage}
+                  autoContrast
+                  variant="gradient"
+                  gradient={{ from: 'violet', to: 'orange', deg: 0 }}
+                >
+                  Restart Game
+                </Button>
+              )}
+            </div>
+            <div className={classes.statCounts}>
+              <h3 className={classes.counts}>
+                WPM: <span style={{ color: '#e8590b' }}>{totalCharTyped / 5}</span>
+              </h3>
+              <h3 className={classes.counts}>
+                Words Typed: <span style={{ color: '#e8590b' }}>{correctWords}</span>
+              </h3>
+              <h3 className={classes.counts}>
+                Characters Typed: <span style={{ color: '#e8590b' }}>{totalCharTyped}</span>
+              </h3>
+              <h3 className={classes.counts}>
+                Characters Per Second:{' '}
+                <span style={{ color: '#e8590b' }}>{(totalCharTyped / 60).toFixed(2)}</span>
+              </h3>
+            </div>
           </div>
+          <Progress
+            transitionDuration={500} // 1667 milliseconds = 1.667 seconds
+            style={{ margin: 10, overflow: 'hidden' }}
+            color="lime"
+            size="xl"
+            value={time}
+          />
         </div>
-        <Progress
-          transitionDuration={1667} // 1667 milliseconds = 1.667 seconds
-          style={{ margin: 10 }}
-          color="orange"
-          size="xl"
-          animated
-          value={time}
-        />
+        <div className={classes.wordDiv}>
+          {words.map((word, index) => (
+            <span
+              key={word}
+              className={index === currentWordIndex ? classes.currentWord : classes.otherWords}
+            >
+              {word}
+            </span>
+          ))}
+        </div>
+        <form onSubmit={handleSubmit}>
+          <Input
+            disabled={!timerStarted}
+            id="input"
+            className={classes.input}
+            size="lg"
+            radius="md"
+            value={inputValue}
+            placeholder=""
+            onChange={handleInputChange}
+          />
+        </form>
       </div>
-      <div className={classes.wordDiv}>
-        {words.map((word, index) => (
-          <span
-            key={word}
-            className={index === currentWordIndex ? classes.currentWord : classes.otherWords}
-          >
-            {word}
-          </span>
-        ))}
-      </div>
-      <form onSubmit={handleSubmit}>
-        <Input
-          disabled={!timerStarted}
-          id="input"
-          className={classes.input}
-          size="lg"
-          radius="md"
-          value={inputValue}
-          placeholder=""
-          onChange={handleInputChange}
-        />
-      </form>
-    </div>
+    </MantineProvider>
   );
 }

@@ -16,8 +16,7 @@ export function Welcome() {
         <Anchor href="https://mantine.dev/guides/vite/" size="lg">
           this guide
         </Anchor>
-        . To get started edit pages/Home.page.tsx file.{' '}
-        <Anchor href="/game">To Game Page!</Anchor>
+        . To get started edit pages/Home.page.tsx file. <Anchor href="/game">To Game Page!</Anchor>
       </Text>
     </>
   );

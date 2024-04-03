@@ -22,6 +22,8 @@
     background-color: rgb(64, 64, 64);
     color: black;
     gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .currentWord {
@@ -29,7 +31,8 @@
     background: #e8590b;
     padding: 3px;
     font-weight: bold;
-    border-radius: 10px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px #00000063;
 }
 
 .otherWords {
@@ -48,24 +51,34 @@
 .stats {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
     background-color: rgb(64, 64, 64);
     color: black;
     border-radius: 10px;
 }
 
-.timer{
+.clockAndButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px
+}
+
+.timer {
     font-size: 30px;
     max-width: 100px;
     min-width: 100px;
+    margin-top: -8px;
+    margin-bottom: -10px;
 }
 
 .gameButton {
     margin: 10px;
 }
 
-.statCounts{
+.statCounts {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -77,4 +90,3 @@
 .counts {
     margin: 0px;
 }
-

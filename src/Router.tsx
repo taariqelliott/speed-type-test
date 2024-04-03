@@ -1,18 +1,23 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { MantineProvider } from '@mantine/core';
 import { HomePage } from './pages/Home.page';
 import Game from './pages/Game.page';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />,
+    element: <Game />,
   },
   {
-    path: '/game',
-    element: <Game />,
+    path: '/home',
+    element: <HomePage />,
   },
 ]);
 
 export function Router() {
-  return <RouterProvider router={router} />;
+  return (
+    <MantineProvider defaultColorScheme="dark">
+      <RouterProvider router={router} />
+    </MantineProvider>
+  );
 }
